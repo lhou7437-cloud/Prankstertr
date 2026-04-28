@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click to Continue</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+    }
+
+    .box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+    }
+
+    h2 { margin-bottom: 10px; }
+    p { color: #555; margin-bottom: 30px; }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover { background: #45a049; }
+
+    #jumpscare {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      animation: flash 0.1s infinite alternate;
+    }
+
+    @keyframes flash {
+      from { background: #000; }
+      to { background: #1a0000; }
+    }
+
+    @keyframes shake {
+      0%   { transform: translate(0,0) rotate(0deg) scale(1); }
+      25%  { transform: translate(-15px, 15px) rotate(-4deg) scale(1.05); }
+      50%  { transform: translate(15px, -15px) rotate(4deg) scale(0.95); }
+      75%  { transform: translate(-15px,-15px) rotate(-2deg) scale(1.05); }
+      100% { transform: translate(15px, 15px) rotate(2deg) scale(1); }
+    }
+
+    .face-wrap {
+      animation: shake 0.08s infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .face {
+      width: 320px;
+      height: 380px;
+      background: #b8966e;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 0 80px 30px red;
+    }
+
+    .eye-socket {
+      position: absolute;
+      width: 90px;
+      height: 100px;
+      background: #000;
+      border-radius: 50%;
+      top: 90px;
+    }
+
+    .eye-socket.left { left: 55px; }
+    .eye-socket.right { right: 55px; }
+
+    .eye {
+      width: 60px;
+      height: 65px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .pupil {
+      width: 28px;
+      height: 28px;
+      background: #000;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .mouth {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 80px;
+      border-bottom: 8px solid #000;
+      border-radius: 0 0 110px 110px;
+      overflow: hidden;
+      background: #8b0000;
+    }
+
+    .teeth-row {
+      display: flex;
+      justify-content: space-around;
+      padding: 4px;
+    }
+
+    .tooth {
+      width: 22px;
+      height: 30px;
+      background: white;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .blood {
+      position: absolute;
+      width: 8px;
+      background: red;
+      border-radius: 0 0 4px 4px;
+      top: 0;
+    }
+
+    .b1 { height: 40px; left: 30px; }
+    .b2 { height: 25px; left: 80px; }
+    .b3 { height: 50px; left: 140px; }
+    .b4 { height: 30px; left: 190px; }
+
+    .scar {
+      position: absolute;
+      background: #8b0000;
+      border-radius: 4px;
+    }
+
+    .scar1 {
+      width: 6px;
+      height: 60px;
+      top: 110px;
+      left: 60px;
+      transform: rotate(15deg);
+    }
+
+    .scar2 {
+      width: 6px;
+      height: 60px;
+      top: 110px;
+      right: 60px;
+      transform: rotate(-15deg);
+    }
+
+    .scary-text {
+      color: red;
+      font-size: 48px;
+      font-weight: bold;
+      margin-top: 30px;
+      font-family: 'Courier New', monospace;
+      text-shadow: 0 0 20px red;
+      letter-spacing: 6px;
+      animation: shake 0.08s infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Terms & Conditions</h2>
+    <p>By clicking "Agree & Continue" you agree to our terms of service and privacy policy.</p>
+    <button onclick="triggerJumpscare()">Agree & Continue</button>
+  </div>
+
+  <div id="jumpscare">
+    <div class="face-wrap">
+      <div class="face">
+        <div class="eye-socket left"><div class="eye"><div class="pupil"></div></div></div>
+        <div class="eye-socket right"><div class="eye"><div class="pupil"></div></div></div>
+        <div class="scar1"></div>
+        <div class="scar2"></div>
+        <div class="mouth">
+          <div class="teeth-row">
+            <div class="tooth"></div>
+            <div class="tooth"></div>
+            <div class="tooth"></div>
+            <div class="tooth"></div>
+            <div class="tooth"></div>
+            <div class="tooth"></div>
+          </div>
+          <div class="blood b1"></div>
+          <div class="blood b2"></div>
+          <div class="blood b3"></div>
+          <div class="blood b4"></div>
+        </div>
+      </div>
+    </div>
+    <div class="scary-text">GO TO SLEEP</div>
+  </div>
+
+  <script>
+    function triggerJumpscare() {
+      const js = document.getElementById('jumpscare');
+      js.style.display = 'flex';
+
+      // Scary scream sound
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      oscillator.type = 'sawtooth';
+      oscillator.frequency.setValueAtTime(900, ctx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 2);
+      gainNode.gain.setValueAtTime(1, ctx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2);
+      oscillator.start();
+      oscillator.stop(ctx.currentTime + 2);
+
+      // Second layer - high pitched shriek
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.type = 'square';
+      osc2.frequency.setValueAtTime(1200, ctx.currentTime);
+      osc2.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 1);
+      gain2.gain.setValueAtTime(0.5, ctx.currentTime);
+      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1);
+      osc2.start();
+      osc2.stop(ctx.currentTime + 1);
+
+      setTimeout(() => {
+        js.style.display = 'none';
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
